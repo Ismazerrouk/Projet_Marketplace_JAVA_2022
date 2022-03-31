@@ -10,7 +10,7 @@ public class MarketplaceAdmin extends User {
     /**
      * 
      */
-    public void DéléguerServiceLivraison() {
+    public void DeleguerServiceLivraison() {
         // TODO implement here
     }
 

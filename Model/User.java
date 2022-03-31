@@ -6,7 +6,6 @@ public abstract class User {
 	private String mdp;
     
     public User(String username, String mdp) {
-		super();
 		this.username = username;
 		this.mdp = mdp;
 	}

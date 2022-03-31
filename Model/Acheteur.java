@@ -8,12 +8,12 @@ public class Acheteur extends User {
 
 
 
-	public Boolean getAbonné() {
+	public Boolean getAbonne() {
 		return abonne;
 	}
 
 
-	public void setAbonné(Boolean abonné) {
+	public void setAbonne(Boolean abonne) {
 		this.abonne = abonne;
 	}
 
@@ -66,7 +66,7 @@ public class Acheteur extends User {
     /**
      * 
      */
-    public void définirCritere() {
+    public void definirCritere() {
         // TODO implement here
     }
 
