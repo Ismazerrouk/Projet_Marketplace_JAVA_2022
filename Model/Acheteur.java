@@ -1,14 +1,17 @@
-
-
+import java.util.ArrayList;
 
 public class Acheteur extends User {
+
 	private Boolean abonne;
-	
-	
+
+    private final ArrayList<Produit> liste_P = new ArrayList<>();
 
 
+    public ArrayList<Produit> getListe_P() {
+        return liste_P;
+    }
 
-	public Boolean getAbonne() {
+    public Boolean getAbonne() {
 		return abonne;
 	}
 

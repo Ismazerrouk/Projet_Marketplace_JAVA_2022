@@ -15,7 +15,6 @@ public class Vehicule {
     /**
      * 
      */
-    public String type de véhicule;
 
 
 }

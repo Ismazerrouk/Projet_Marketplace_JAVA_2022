@@ -1,10 +1,10 @@
+import java.util.ArrayList;
 
 public class Vendeur extends User {
 	
 	private String Type;
-    /**
-     * Default constructor
-     */
+    private ArrayList<ProduitExterne> produitExterneArrayList = new ArrayList<>();
+
     public Vendeur(String username, String mdp, String type) {
     	super(username,mdp);
     	this.setType(type);
