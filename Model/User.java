@@ -4,10 +4,12 @@ public abstract class User {
 
 	private String username;
 	private String mdp;
+	private Boolean connected;
     
-    public User(String username, String mdp) {
+    public User(String username, String mdp, Boolean connected) {
 		this.username = username;
 		this.mdp = mdp;
+		this.connected = connected;
 	}
     
  

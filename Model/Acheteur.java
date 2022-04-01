@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 
 public class Acheteur extends User {
@@ -21,8 +24,8 @@ public class Acheteur extends User {
 	}
 
 
-	public Acheteur(String username, String mdp, Boolean abonne) {
-    	super(username, mdp);
+	public Acheteur(String username, String mdp,Boolean connected, Boolean abonne) {
+    	super(username, mdp, connected);
     	this.abonne = abonne;
     }
 
@@ -96,16 +99,26 @@ public class Acheteur extends User {
 
 
 	@Override
-	public void CreerCompte() {
-		// TODO Auto-generated method stub
-		
+	public void CreerCompte(String username, String mdp, Boolean abonne) {
+            // TODO Auto-generated method stub
+        String pathFile = "connexion.csv";
+        try{
+            BufferedReader br = new BufferedReader(new FileReader(pathFile));
+            System.out.println("File found");
+
+        }
+        catch (FileNotFoundException e){
+            System.out.println("File not found");
+        }
+
 	}
 
 
 	@Override
-	public void Identification() {
-		// TODO Auto-generated method stub
-		
-	}
+	public static void Identification() {
+        // TODO Auto-generated method stub
+
+
+    }
 
 }

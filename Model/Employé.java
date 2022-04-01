@@ -1,6 +1,3 @@
-
-import java.util.*;
-
 /**
  * 
  */
@@ -13,8 +10,8 @@ public class Employé extends User {
     /**
      * Default constructor
      */
-    public Employé(String username, String mdp, String nom, String prenom, String adresse) {
-        super(username, mdp);
+    public Employé(String username, String mdp,Boolean connected, String nom, String prenom, String adresse) {
+        super(username, mdp, connected);
         Nom = nom;
         Prenom = prenom;
         this.adresse = adresse;
@@ -26,7 +23,7 @@ public class Employé extends User {
     }
 
     @Override
-    public void CreerCompte() {
+    public void CreerCompte(String username, String mdp) {
 
     }
 }

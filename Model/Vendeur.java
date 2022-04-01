@@ -5,8 +5,8 @@ public class Vendeur extends User {
 	private String Type;
     private ArrayList<ProduitExterne> produitExterneArrayList = new ArrayList<>();
 
-    public Vendeur(String username, String mdp, String type) {
-    	super(username,mdp);
+    public Vendeur(String username, String mdp,Boolean connected, String type) {
+    	super(username,mdp, connected);
     	this.setType(type);
     }
 

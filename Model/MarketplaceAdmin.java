@@ -2,8 +2,8 @@
 public class MarketplaceAdmin extends User {
 	
 	
-    public MarketplaceAdmin(String username, String mdp) {
-    	super(username,mdp);
+    public MarketplaceAdmin(String username, String mdp, Boolean connected) {
+    	super(username,mdp,connected);
     }
 
 
@@ -60,13 +60,7 @@ public class MarketplaceAdmin extends User {
 
 
 
-
-
-
-
-
-
-	@Override
+    @Override
 	public void CreerCompte() {
 		// TODO Auto-generated method stub
 		
