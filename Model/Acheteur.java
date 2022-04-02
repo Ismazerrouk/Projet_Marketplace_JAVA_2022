@@ -1,6 +1,4 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 import java.util.ArrayList;
 
 public class Acheteur extends User {
@@ -99,25 +97,63 @@ public class Acheteur extends User {
 
 
 	@Override
-	public void CreerCompte(String username, String mdp, Boolean abonne) {
+	public void CreerCompte(String username, String mdp) {
             // TODO Auto-generated method stub
         String pathFile = "connexion.csv";
+        File file = new File(pathFile);
         try{
-            BufferedReader br = new BufferedReader(new FileReader(pathFile));
             System.out.println("File found");
+            FileWriter writer = new FileWriter(file);
+            BufferedWriter bw = new BufferedWriter(writer);
+            bw.newLine();
+            bw.write(username + ',' + mdp);
+            bw.newLine();
+            bw.close();
+            writer.close();
+            System.out.println("Successfully wrote to the file.");
 
         }
         catch (FileNotFoundException e){
             System.out.println("File not found");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
-	}
+    }
 
 
 	@Override
-	public static void Identification() {
+	public void Identification(String username, String mdp) {
         // TODO Auto-generated method stub
+        String pathFile = "connexion.csv";
+        File file = new File(pathFile);
+        try{
 
+            BufferedReader br = new BufferedReader(new FileReader(pathFile));
+            System.out.println("File found");
+            String line = br.readLine();
+            while(line != null){
+                line = br.readLine();
+                System.out.println(line);
+                if(line == username+","+mdp) {
+
+                    System.out.println(line);
+                    System.out.println("Authentication suceed");
+                    break;
+               }
+                else{
+                    System.out.println("Authentication failed");
+
+
+                }
+            }
+        }
+
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 

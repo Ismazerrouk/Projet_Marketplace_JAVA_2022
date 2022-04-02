@@ -19,7 +19,9 @@ public class Main {
                 switch (choix){
                     case 0 : System.out.println("CIAO !");
                         break;
-                    case 1 : CreationCompte(user2);
+                    case 1 : Authentication(user2);
+                        break;
+                    case 2 :  CreationCompte(user2);
 
                 }
 
@@ -95,8 +97,23 @@ public class Main {
 
         username = lireInfo("Définissez votre nom d'utilisateur");
         mdp = lireInfo("Définissez votre mot de passe");
-        abonne = lireInfoBool("Voulez-vous abonner à la marketplace");
-        a.CreerCompte(username,mdp,abonne);
+        //abonne = lireInfoBool("Voulez-vous abonner à la marketplace");
+        a.setUsername(username);
+        a.setMdp(mdp);
+        a.CreerCompte(username,mdp);  //creer le compte sur le fichier connexion.csv
+
+    }
+    private static void Authentication(Acheteur a){
+        String username;
+        String mdp;
+
+
+        username = lireInfo("Entrez votre nom d'utilisateur");
+        mdp = lireInfo("Entrez votre mot de passe");
+        //abonne = lireInfoBool("Voulez-vous abonner à la marketplace");
+        a.setMdp(mdp);
+        a.setUsername(username);
+        a.Identification(username,mdp);
 
     }
 }

@@ -43,9 +43,9 @@ public abstract class User {
 
 
 
-	public abstract void Identification();
+	public abstract void Identification(String username, String mdp);
     
-    public abstract void CreerCompte();
+    public abstract void CreerCompte(String username, String mdp);
     	
     
 

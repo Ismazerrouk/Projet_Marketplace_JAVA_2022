@@ -73,13 +73,13 @@ public class Vendeur extends User {
     }
 
 	@Override
-	public void Identification() {
+	public void Identification(String username, String mdp) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void CreerCompte() {
+	public void CreerCompte(String username, String mdp) {
 		// TODO Auto-generated method stub
 		
 	}

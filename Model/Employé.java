@@ -18,7 +18,7 @@ public class Employé extends User {
     }
 
     @Override
-    public void Identification() {
+    public void Identification(String username, String mdp) {
 
     }
 

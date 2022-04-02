@@ -52,7 +52,7 @@ public class MarketplaceAdmin extends User {
 
 
 	@Override
-	public void Identification() {
+	public void Identification(String username, String mdp) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -61,7 +61,7 @@ public class MarketplaceAdmin extends User {
 
 
     @Override
-	public void CreerCompte() {
+	public void CreerCompte(String username, String mdp) {
 		// TODO Auto-generated method stub
 		
 	}
