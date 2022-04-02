@@ -17,13 +17,6 @@ public class Employé extends User {
         this.adresse = adresse;
     }
 
-    @Override
-    public void Identification(String username, String mdp) {
 
-    }
 
-    @Override
-    public void CreerCompte(String username, String mdp) {
-
-    }
 }

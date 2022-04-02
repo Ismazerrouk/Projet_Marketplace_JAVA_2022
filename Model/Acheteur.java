@@ -96,14 +96,13 @@ public class Acheteur extends User {
     }
 
 
-	@Override
-	public void CreerCompte(String username, String mdp) {
+	/**public void CreerCompte(String username, String mdp) {
             // TODO Auto-generated method stub
         String pathFile = "connexion.csv";
         File file = new File(pathFile);
         try{
             System.out.println("File found");
-            FileWriter writer = new FileWriter(file);
+            FileWriter writer = new FileWriter(file, true);
             BufferedWriter bw = new BufferedWriter(writer);
             bw.newLine();
             bw.write(username + ',' + mdp);
@@ -120,41 +119,7 @@ public class Acheteur extends User {
         }
 
     }
+*/
 
-
-	@Override
-	public void Identification(String username, String mdp) {
-        // TODO Auto-generated method stub
-        String pathFile = "connexion.csv";
-        File file = new File(pathFile);
-        try{
-
-            BufferedReader br = new BufferedReader(new FileReader(pathFile));
-            System.out.println("File found");
-            String line = br.readLine();
-            while(line != null){
-                line = br.readLine();
-                System.out.println(line);
-                if(line == username+","+mdp) {
-
-                    System.out.println(line);
-                    System.out.println("Authentication suceed");
-                    break;
-               }
-                else{
-                    System.out.println("Authentication failed");
-
-
-                }
-            }
-        }
-
-        catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
 
 }

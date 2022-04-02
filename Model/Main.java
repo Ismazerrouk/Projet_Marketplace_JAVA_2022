@@ -1,4 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOError;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -7,9 +10,10 @@ public class Main {
         int choix = -1; //choix du menu
         User user1;
         Acheteur user2;
-
+        ArrayList<String> produits = new ArrayList<>();
         user1 = new Vendeur(" "," ",false, " ");
         user2 = new Acheteur(" "," ",false, false);
+
         try{
 
             while(choix != 0){
@@ -20,6 +24,8 @@ public class Main {
                     case 0 : System.out.println("CIAO !");
                         break;
                     case 1 : Authentication(user2);
+                            recupProduitBDD(produits);
+                            afficherMenuAcheteur(produits);
                         break;
                     case 2 :  CreationCompte(user2);
 
@@ -35,7 +41,7 @@ public class Main {
 
 
     public static void afficherMenu0(){
-        System.out.println("Page de connexion/inscription");
+        System.out.println("\n Page de connexion/inscription");
         System.out.println("\n------------------En tant qu'acheteur-----------------------");
         System.out.println("(1) : Veuillez vous connecter");
         System.out.println("Si vous n'avez pas de compte");
@@ -49,6 +55,34 @@ public class Main {
         System.out.println("Si vous n'avez pas de compte");
         System.out.println("(6) Créer un compte");
         System.out.println("\n------------------Pressez (0) pour quitter------------------------");
+    }
+
+    public static void afficherMenuAcheteur(ArrayList produits){
+        System.out.println("\n Vous êtes sur la page acheteur");
+        afficherProduits(produits);
+    }
+
+    public  static void afficherProduits(ArrayList produits){
+        for (int i =0;i<produits.size();i++){
+            System.out.println("\n Produit" + i + ":" + produits.get(i));
+        }
+    }
+
+    public static void recupProduitBDD(ArrayList produits){
+        try {
+            String pathFile = "Base produits.csv";
+            File file = new File(pathFile);
+            //File myObj = new File("filename.txt");
+            Scanner myReader = new Scanner(file);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                produits.add(data);
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
     }
 
     private static String lireInfo(String messageInfo) {

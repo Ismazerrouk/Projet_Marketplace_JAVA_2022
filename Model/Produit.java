@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class Produit {
 	
@@ -56,6 +59,7 @@ public class Produit {
 	public void setDate_livraison(String date_livraison) {
 		this.date_livraison = date_livraison;
 	}
+
 
 
 	public Produit(String nom, int prix, String description, Boolean disponibilite, String date_livraison) {
