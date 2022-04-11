@@ -1,4 +1,9 @@
+package Model;
+
 import java.io.*;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 public abstract class User {
 
@@ -43,7 +48,7 @@ public abstract class User {
 
 
 
-	public static void Identification(String username, String mdp) {
+	public static void Identification(String username, String mdp)  {
 		// TODO Auto-generated method stub
 		String pathFile = "connexion.csv";
 		File file = new File(pathFile);
@@ -67,6 +72,7 @@ public abstract class User {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 
 	}
 

@@ -1,5 +1,5 @@
 
-public class ProduitExterne extends Produit {
+/**public class ProduitExterne extends Produit {
 	private Vendeur vendeur;
 	
     public ProduitExterne(String nom, int prix, String description, Boolean disponibilite, String date_livraison,Vendeur vendeur) {
@@ -16,4 +16,4 @@ public class ProduitExterne extends Produit {
 	}
 
 
-}
+}*/

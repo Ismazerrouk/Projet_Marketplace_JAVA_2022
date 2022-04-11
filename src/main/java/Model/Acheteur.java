@@ -1,15 +1,20 @@
-import java.io.*;
+package Model;
+
 import java.util.ArrayList;
 
 public class Acheteur extends User {
 
 	private Boolean abonne;
+    private Panier panier;
 
     private final ArrayList<Produit> liste_P = new ArrayList<>();
 
 
     public ArrayList<Produit> getListe_P() {
         return liste_P;
+    }
+    public void setProduitList(Produit p) {
+        liste_P.add(p);
     }
 
     public Boolean getAbonne() {
@@ -27,7 +32,16 @@ public class Acheteur extends User {
     	this.abonne = abonne;
     }
 
-	
+    @Override
+    public String toString() {
+        String s = "Acheteur{" +
+                "abonne=" + abonne +
+                ", liste_P=" + liste_P +
+                //", panier = " + panier.toString() +
+                '}';
+        return s;
+    }
+
     public void SuivreColis() {
         // TODO implement here
     }
@@ -44,6 +58,23 @@ public class Acheteur extends User {
      */
     public void AjouterPanier() {
         // TODO implement here
+        Produit produit;
+        float coutTot = 0;
+
+        if (this.abonne == false) {
+            for (int i = 0; i < liste_P.size(); i++) {
+                produit = liste_P.get(i);
+                coutTot = coutTot + produit.getPrix() + produit.getCoutLivraison();
+            }
+            this.setPanier( new Panier(coutTot, "", this, getListe_P()));
+            }
+         else {
+            for (int i = 0; i < liste_P.size(); i++) {
+                produit = liste_P.get(i);
+                coutTot = coutTot + produit.getPrix() ;
+            }
+            this.setPanier(new Panier(coutTot, "", this, getListe_P()));
+        }
     }
 
     /**
@@ -58,6 +89,7 @@ public class Acheteur extends User {
      */
     public void SouscrireAbonnement() {
         // TODO implement here
+        setAbonne(true);
     }
 
     /**
@@ -81,12 +113,7 @@ public class Acheteur extends User {
         // TODO implement here
     }
 
-    /**
-     * 
-     */
-    public void Operation1() {
-        // TODO implement here
-    }
+
 
     /**
      * 
@@ -95,8 +122,16 @@ public class Acheteur extends User {
         // TODO implement here
     }
 
+    public Panier getPanier() {
+        return panier;
+    }
 
-	/**public void CreerCompte(String username, String mdp) {
+    public void setPanier(Panier panier) {
+        this.panier = panier;
+    }
+
+
+    /*public void CreerCompte(String username, String mdp) {
             // TODO Auto-generated method stub
         String pathFile = "connexion.csv";
         File file = new File(pathFile);
@@ -118,8 +153,8 @@ public class Acheteur extends User {
             e.printStackTrace();
         }
 
-    }
-*/
+    }*/
+
 
 
 }

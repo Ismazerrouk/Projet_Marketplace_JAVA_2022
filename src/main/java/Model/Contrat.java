@@ -1,3 +1,4 @@
+package Model;
 
 import java.util.*;
 
@@ -13,7 +14,7 @@ public class Contrat {
      * Default constructor
      */
     public Contrat() {
-    }
+        }
 
 
 }
