@@ -1,5 +1,10 @@
-username,mdp
-isma,maoa
-isma,isma1507
-paul,camille
-ismo,barber
+username,mdp,type
+isma,maoa,vendeur
+isma,isma1507,acheteur
+paul,camille,marketplace
+ismo,barber,livreur
+barberismo,1507,acheteur
+livreur,lili,acheteur
+livreur,okay,marketplace
+acheteur,chiant,acheteur
+livreur,b,livreur

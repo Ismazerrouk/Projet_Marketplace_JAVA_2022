@@ -1,9 +1,5 @@
 package Model;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-
 public class Produit {
 
 	private String ref;
@@ -12,8 +8,31 @@ public class Produit {
 	private Boolean disponibilite;
 	private String  delai;
 	private float CoutLivraison;
+	private String IdVendeur;
 
+	public Produit(String ref, String designation, Float prix, Float coutLivraison, String idVendeur) {
+		this.ref = ref;
+		this.prix = prix;
+		this.designation = designation;
+		CoutLivraison = coutLivraison;
+		this.IdVendeur = idVendeur;
+	}
 
+	public String getDesignation() {
+		return designation;
+	}
+
+	public void setDesignation(String designation) {
+		this.designation = designation;
+	}
+
+	public String getIdVendeur() {
+		return IdVendeur;
+	}
+
+	public void setIdVendeur(String idVendeur) {
+		IdVendeur = Vendeur.getIdVendeur();
+	}
 
 	public float getPrix() {
 		return prix;
@@ -55,7 +74,7 @@ public class Produit {
 	}
 
 
-	public Produit(String ref,String designation ,float prix, float coutLivraison) {
+	public Produit(String ref, String designation, float prix, float coutLivraison) {
 		this.ref = ref;
 		this.prix = prix;
 		this.designation = designation;

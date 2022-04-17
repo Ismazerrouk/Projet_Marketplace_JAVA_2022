@@ -1,5 +1,7 @@
 package Model;
 
+
+
 import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -10,17 +12,23 @@ public abstract class User {
 	private String username;
 	private String mdp;
 	private Boolean connected;
+	private int ID;
+
     
     public User(String username, String mdp, Boolean connected) {
 		this.username = username;
 		this.mdp = mdp;
 		this.connected = connected;
 	}
-    
- 
+
+	public User(String username, String mdp) {
+		this.username = username;
+		this.mdp = mdp;
+	}
 
 
-    public String getUsername() {
+
+	public String getUsername() {
 		return username;
 	}
 
@@ -45,10 +53,28 @@ public abstract class User {
 		this.mdp = mdp;
 	}
 
+	public int getID() {
+		return ID;
+	}
 
+	public void setID() {
+		String csvFile = "connexion.csv";
+		String line = "";
+		String cvsSplitBy = ",";
 
+		try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
 
-	public static void Identification(String username, String mdp)  {
+			while ((line = br.readLine()) != null) {
+				ID = ID + 1;
+
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+		public static Boolean Identification(String username, String mdp, String type)  {
 		// TODO Auto-generated method stub
 		String pathFile = "connexion.csv";
 		File file = new File(pathFile);
@@ -59,24 +85,28 @@ public abstract class User {
 
 			while(line != null){
 				line = br.readLine();
-				if(line.equals(username+","+mdp) ) {
+				if(line.equals(username+","+mdp+','+type)) {
 					System.out.println("Authentication suceed");
-					break;
+					return true;
 				}
 
 			}
+			return false;
 		}
 
 		catch (FileNotFoundException e) {
 			e.printStackTrace();
+			return false;
 		} catch (IOException e) {
 			e.printStackTrace();
+			return false;
 		}
 
 
-	}
 
-    public static void CreerCompte(String username, String mdp) {
+    }
+
+    public static void CreerCompte(String username, String mdp, String type) {
 		// TODO Auto-generated method stub
 		String pathFile = "connexion.csv";
 		File file = new File(pathFile);
@@ -84,7 +114,7 @@ public abstract class User {
 			System.out.println("File found");
 			FileWriter writer = new FileWriter(file, true);
 			BufferedWriter bw = new BufferedWriter(writer);
-			bw.write(username + ',' + mdp);
+			bw.write(username + ',' + mdp + ',' + type);
 			bw.newLine();
 			bw.close();
 			writer.close();
@@ -96,6 +126,7 @@ public abstract class User {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 
 	}
 
