@@ -8,11 +8,16 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;
 
+import static Model.Main.lireInfo;
+
 public class Vendeur extends User {
 
-    private static String idVendeur;
+    private String idVendeur;
     private static Boolean SousContrat = false;
     private static Contrat contrat;
+    public ArrayList<Produit> produitsVendus = new ArrayList<>();
+    private String Type;
+    public ArrayList<Produit> produitsVendeur = new ArrayList<>();
 
     @Override
     public String toString() {
@@ -23,6 +28,14 @@ public class Vendeur extends User {
                 '}';
     }
 
+    public ArrayList<Produit> getProduitsVendus() {
+        return produitsVendus;
+    }
+
+    public void setProduitsVendus(Produit p) {
+        produitsVendus.add(p);
+    }
+
     public Boolean getSousContrat() {
         return SousContrat;
     }
@@ -31,7 +44,7 @@ public class Vendeur extends User {
         SousContrat = sousContrat;
     }
 
-    public static String getIdVendeur() {
+    public String getIdVendeur() {
         return idVendeur;
     }
 
@@ -39,8 +52,7 @@ public class Vendeur extends User {
         this.idVendeur = idVendeur;
     }
 
-    private String Type;
-    private ArrayList<Produit> produitsVendeur = new ArrayList<>();
+
 
     public ArrayList<Produit> getProduitsVendeur() {
         return produitsVendeur;
@@ -149,6 +161,7 @@ public class Vendeur extends User {
         }
     }
     public void AjouterProduitBDD(Produit p) {  //ajoute le nouveau produit du Vendeur dans le fichier .csv
+
         String pathFile = "Base produits.csv";
         File file = new File(pathFile);
         try{
@@ -172,23 +185,80 @@ public class Vendeur extends User {
     /**
      * 
      */
-    public void Modifier() {
-        // TODO implement here
-
+    public void Modifier() {        //on supprime un produit qu'on veut modifier et on l'ajoute ensuite
+        Supprimer();
+        AjouterProduit();
     }
 
     /**
      * 
      */
     public void Supprimer() {
-        // TODO implement here
+        if (SousContrat == true) {
+            String ref;
+            String saisie;
+            System.out.println("\nVoici la liste des produits que vous vendez actuellement :\n");
+            for (int i = 0; i < getProduitsVendeur().size(); i = i + 1) {
+                System.out.println("\n produit n°" + i + ": " + produitsVendeur.get(i));
+            }
+            saisie = lireInfo("\nRentrez le produit que vous voulez supprimer");
+            ref = produitsVendeur.get(Integer.parseInt(saisie)).getRef();
+            produitsVendeur.remove(Integer.parseInt(saisie));
+            /*System.out.println(produitsVendeur);*/
+            SupprimerProduitBDD(ref);
+        }
+        else{
+            System.out.println("\nVeuillez signer un contrat avec la marketplace pour pouvoir supprimer des produits !\n");
+
+        }
+
     }
 
-    /**
-     * 
-     */
-    public void SuivreVentes() {
+    public void SupprimerProduitBDD(String ref) {   //supprime un produit du fichier Base de produits.csv via sa ref
+        String pathFile = "Base produits.csv";
+        File file = new File(pathFile);
+
+        try {
+            //File myObj = new File("filename.txt");
+            Scanner myReader = new Scanner(file);
+            String[] splitted = new String[0];
+            ArrayList<String> split = new ArrayList<>();
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                if (!data.contains(ref)){
+                    splitted = data.split(",");
+                    for (int j =0; j<splitted.length; j++){
+                        split.add(splitted[j]);
+                        System.out.println(splitted[j]);
+                    }
+                }
+            }
+            System.out.println(split.get(0) + "," + split.get(1));
+            myReader.close();
+            FileWriter writer = new FileWriter(file);
+            BufferedWriter bw = new BufferedWriter(writer);
+            System.out.println(split.size());
+            for (int i = 0; i< split.size() - 4; i = i + 5) {   //on incremente de 5 car une ligne contient 5 splits...
+                bw.write(split.get(i) + "," + split.get(i+1) + "," + split.get(i+2) + "," + split.get(i+3) + "," + split.get(i+4));
+                bw.newLine();
+
+            }
+            bw.close();
+            writer.close();
+
+
+        }
+        catch(FileNotFoundException e){
+                System.out.println("File not found");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+        public void SuivreVentes() {
         // TODO implement here
+        System.out.println("\nVoici la liste de vos produits vendus\n");
+        System.out.println(getProduitsVendus());
 
     }
 
@@ -213,30 +283,13 @@ public class Vendeur extends User {
             MarketplaceAdmin.setListeVendeurContrat(this);
         }
         else{
-            System.out.println("\nVous avez deja un contrat avec la marketplace");
+            System.out.println("\nVous avez un contrat signé avec la marketplace ! ");
         }
           //contrat.setDateDebut();
 
 
 
     }
-
-    /**
-     * 
-     */
-    public void RenouvelerContrat() {
-        // TODO implement here
-    }
-
-    /**
-     * 
-     */
-    public void RésilierContrat() {
-        // TODO implement here
-    }
-
-
-
 
 
 

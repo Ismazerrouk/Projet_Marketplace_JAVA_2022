@@ -7,6 +7,7 @@ import java.util.*;
  * 
  */
 public class Colis {
+    public Status statusColis;
     private int numero;
     private float taille;
     private float poids;
@@ -28,11 +29,20 @@ public class Colis {
     }
 
 
+
     public Colis(int numero, String adresse_livraison, LocalDate date_livraison, Livreur livreur) {
         this.numero = numero;
         this.adresse_livraison = adresse_livraison;
         this.date_livraison = date_livraison;
         this.livreur = livreur;
+    }
+
+    public Status getStatusColis() {
+        return statusColis;
+    }
+
+    public void setStatusColis(Status statusColis) {
+        this.statusColis = statusColis;
     }
 
     public Livreur getLivreur() {
@@ -89,5 +99,18 @@ public class Colis {
 
     public void setMode_livraison(String mode_livraison) {
         this.mode_livraison = mode_livraison;
+    }
+
+    @Override
+    public String toString() {
+        return "Colis{" +
+                "numero=" + numero +
+                ", taille=" + taille +
+                ", poids=" + poids +
+                ", adresse_livraison='" + adresse_livraison + '\'' +
+                ", date_livraison=" + date_livraison +
+                ", mode_livraison='" + mode_livraison + '\'' +
+                ", livreur=" + livreur +
+                '}';
     }
 }

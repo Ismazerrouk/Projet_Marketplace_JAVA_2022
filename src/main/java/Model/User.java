@@ -75,7 +75,6 @@ public abstract class User {
 	}
 
 		public static Boolean Identification(String username, String mdp, String type)  {
-		// TODO Auto-generated method stub
 		String pathFile = "connexion.csv";
 		File file = new File(pathFile);
 		try{
@@ -84,6 +83,7 @@ public abstract class User {
 			String line = br.readLine();
 
 			while(line != null){
+				System.out.println(line);
 				line = br.readLine();
 				if(line.equals(username+","+mdp+','+type)) {
 					System.out.println("Authentication suceed");
@@ -92,6 +92,7 @@ public abstract class User {
 
 			}
 			return false;
+
 		}
 
 		catch (FileNotFoundException e) {
@@ -107,7 +108,6 @@ public abstract class User {
     }
 
     public static void CreerCompte(String username, String mdp, String type) {
-		// TODO Auto-generated method stub
 		String pathFile = "connexion.csv";
 		File file = new File(pathFile);
 		try{

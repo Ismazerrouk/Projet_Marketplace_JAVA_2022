@@ -15,14 +15,25 @@ public class MarketplaceAdmin extends User {
 
     private static ArrayList<Commande> listeCommande = new ArrayList<>();
     private ArrayList<Produit> catalogueMarketPlace = new ArrayList<Produit>();
+    public static ArrayList<Vendeur> ListeVendeur = new ArrayList<>();
     private static ArrayList<Vendeur> ListeVendeurContrat = new ArrayList<>();
-    private static ArrayList<Livreur> ListeLivreur = new ArrayList<>();
+    public static ArrayList<Livreur> ListeLivreur = new ArrayList<>();
+    public static ArrayList<Acheteur> ListeAcheteur =new ArrayList<>();
 	
     public MarketplaceAdmin(String username, String mdp, Boolean connected) {
     	super(username,mdp,connected);
     }
 
-    public ArrayList<Livreur> getListeLivreur() {
+
+    public ArrayList<Vendeur> getListeVendeur() {
+        return ListeVendeur;
+    }
+
+    public void setListeVendeur(ArrayList<Vendeur> listeVendeur) {
+        ListeVendeur = listeVendeur;
+    }
+
+    public static ArrayList<Livreur> getListeLivreur() {
         return ListeLivreur;
     }
 
@@ -58,10 +69,9 @@ public class MarketplaceAdmin extends User {
      * 
      */
 
-
     public void ChiffreAffaire() {
         float chiffreAffaire = 0;
-        // TODO implement here
+
         for (int i=0; i<getListeCommande().size();i++){
             Commande commande = getListeCommande().get(i);
             chiffreAffaire += commande.getPrixCommande();
@@ -151,24 +161,31 @@ public class MarketplaceAdmin extends User {
 
 
     public void ExpedierCommande() {
-        // TODO implement here
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-        LocalDate localDate = LocalDate.now();
-        System.out.println("\nVoici les commandes à expédier : " + getListeCommande());
+        if (!(null == ListeLivreur)) {
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+            LocalDate localDate = LocalDate.now();
+            System.out.println("\nVoici les commandes à expédier : " + getListeCommande());
 
-        System.out.println("\nEntrez la commande que vous voulez expédier (entrez l'entier correspondant) : ");
-        int choixCommande  = saisieChoix(0, getListeCommande().size());
+            System.out.println("\nEntrez la commande que vous voulez expédier (entrez l'entier correspondant) : ");
+            int choixCommande = saisieChoix(0, getListeCommande().size());
 
-        System.out.println("\nVoici la liste des livreurs inscrits : " + getListeLivreur());
+            System.out.println("\nVoici la liste des livreurs inscrits : " + getListeLivreur());
 
-        System.out.println("\nEntrez le livreur que vous voulez pour expédier le colis de cette commande (entrez l'entier correspondant) : ");
-        int choixLivreur = saisieChoix(0, getListeLivreur().size());
-        Colis colis = new Colis(getListeCommande().get(choixCommande).getNuméro(), getListeCommande().get(choixCommande).getAcheteur().getAdresseLivraison(), localDate, getListeLivreur().get(choixLivreur));
-        getListeLivreur().get(choixLivreur).setListeColis(colis);           // on ajoute le colis au livreur choisi par l'admin
+            System.out.println("\nEntrez le livreur que vous voulez pour expédier le colis de cette commande (entrez l'entier correspondant) : ");
+            int choixLivreur = saisieChoix(0, getListeLivreur().size());
+            Colis colis = new Colis(getListeCommande().get(choixCommande).getNuméro(), getListeCommande().get(choixCommande).getAcheteur().getAdresseLivraison(), localDate, getListeLivreur().get(choixLivreur));
+            getListeLivreur().get(choixLivreur).setListeColis(colis);           // on ajoute le colis au livreur choisi par l'admin
+            System.out.println(getListeLivreur().get(choixLivreur).getListeColis());
 
-        System.out.println("\nLa colis de cette commande va être pris en charge par votre livreur, il est notifié.");
+            System.out.println("\nLa colis de cette commande va être pris en charge par votre livreur, il est notifié.");
+            colis.setStatusColis(Status.En_attente);
+            getListeCommande().get(choixCommande).getAcheteur().setListeColis(colis); //ajoute le colis à la liste de colis de l'acheteur
 
-
+        }
+        else {
+            System.out.println("\nVous n'avez pas de livreur encore inscrit !");
+        }
+        }
      /*   Colis colis;
         colis = new colis(getID(), Acheteur.getAdresseLivraison(), );*/
     }
@@ -186,5 +203,3 @@ public class MarketplaceAdmin extends User {
 
 
 
-
-}

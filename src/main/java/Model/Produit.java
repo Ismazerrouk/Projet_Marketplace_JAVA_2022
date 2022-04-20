@@ -31,7 +31,7 @@ public class Produit {
 	}
 
 	public void setIdVendeur(String idVendeur) {
-		IdVendeur = Vendeur.getIdVendeur();
+		IdVendeur = getIdVendeur();
 	}
 
 	public float getPrix() {
@@ -90,6 +90,7 @@ public class Produit {
 				", disponibilite=" + disponibilite +
 				", delai='" + delai + '\'' +
 				", CoutLivraison=" + CoutLivraison +
+				", ID du Vendeur=" + IdVendeur +
 				'}';
 	}
 

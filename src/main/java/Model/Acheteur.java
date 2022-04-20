@@ -11,13 +11,21 @@ public class Acheteur extends User {
 	private Boolean abonne;
     private Panier panier;
     private int NumeroCommande;
-    private static String adresseLivraison;
+    private String adresseLivraison;
 
     private ArrayList<Commande> listeCommandes = new ArrayList<>();
     private final ArrayList<Produit> liste_P = new ArrayList<>();
+    public ArrayList<Colis> ListeColis = new ArrayList<Colis>();
 
+    public ArrayList<Colis> getListeColis() {
+        return ListeColis;
+    }
 
-    static String getAdresseLivraison() {
+    public void setListeColis(Colis c) {
+        ListeColis.add(c);
+    }
+
+    public String getAdresseLivraison() {
         return adresseLivraison;
     }
 
@@ -74,25 +82,51 @@ public class Acheteur extends User {
     }
 
     public void SuivreColis() {
-        // TODO implement here
+        System.out.println("----------------------------------------");
+        System.out.println("\nVoici le suivi de vos colis :");
+        for (int i=0;i<ListeColis.size();i++){
+            System.out.println("\n Votre colis n°"+ i + " est " + getListeColis().get(i).getStatusColis());   //renvoie le status de tous les colis de l'acheteur
+        }
+        System.out.println("----------------------------------------");
     }
 
 
     public void AjouterPanier() {
-        // TODO implement here
+
         Produit produit;
         float coutTot = 0;
+        Vendeur v;
+
 
         if (this.abonne == false) {
             for (int i = 0; i < liste_P.size(); i++) {
                 produit = liste_P.get(i);
+                for (int j= 0; j<MarketplaceAdmin.ListeVendeur.size();j++) {
+                    if (produit.getIdVendeur().equals(MarketplaceAdmin.ListeVendeur.get(j).getIdVendeur())) {
+                        v = MarketplaceAdmin.ListeVendeur.get(j);
+                        v.produitsVendus.add(produit);
+
+                        }
+                    }
+
                 coutTot = coutTot + produit.getPrix() + produit.getCoutLivraison();
-            }
+                }
             this.setPanier( new Panier(coutTot, "", this, getListe_P()));
-            }
+        }
+
+
          else {
+
             for (int i = 0; i < liste_P.size(); i++) {
                 produit = liste_P.get(i);
+                for (int j= 0; j<MarketplaceAdmin.ListeVendeur.size();j++) {
+                    if (produit.getIdVendeur().equals(MarketplaceAdmin.ListeVendeur.get(j).getIdVendeur())) {
+
+                        v = MarketplaceAdmin.ListeVendeur.get(j);
+                        v.produitsVendus.add(produit);
+                        System.out.println(v.produitsVendus);
+                    }
+                }
                 coutTot = coutTot + produit.getPrix() ;
             }
             this.setPanier(new Panier(coutTot, "", this, getListe_P()));
@@ -103,13 +137,12 @@ public class Acheteur extends User {
      * 
      */
     public void ValiderPanier() {
-        // TODO implement here
 
         System.out.println("Nous allons valider votre panier et creer une commande...");
         /*ThreadLocalRandom tlr = ThreadLocalRandom.current();
         setNumeroCommande(tlr.nextInt(1,1000));*/
         setNumeroCommande(getID() + listeCommandes.size());
-        Commande c = new Commande(panier.getPrix_Total(), liste_P, NumeroCommande);
+        Commande c = new Commande(panier.getPrix_Total(), liste_P, NumeroCommande,this);
         boolean matchFound;
         String adresse;
         do {
@@ -132,27 +165,10 @@ public class Acheteur extends User {
      * 
      */
     public void SouscrireAbonnement() {
-        // TODO implement here
         setAbonne(true);
     }
 
-    /**
-     * 
-     */
-    public void ChoisirLivraison() {
-        // TODO implement here
-    }
 
-    /**
-     * 
-     */
-    public void definirCritere() {
-        // TODO implement here
-    }
-
-    /**
-     * 
-     */
     public void ComparerPrix() {
         // TODO implement here
     }
@@ -168,30 +184,6 @@ public class Acheteur extends User {
         this.panier = panier;
     }
 
-
-    /*public void CreerCompte(String username, String mdp) {
-            // TODO Auto-generated method stub
-        String pathFile = "connexion.csv";
-        File file = new File(pathFile);
-        try{
-            System.out.println("File found");
-            FileWriter writer = new FileWriter(file, true);
-            BufferedWriter bw = new BufferedWriter(writer);
-            bw.newLine();
-            bw.write(username + ',' + mdp);
-            bw.newLine();
-            bw.close();
-            writer.close();
-            System.out.println("Successfully wrote to the file.");
-
-        }
-        catch (FileNotFoundException e){
-            System.out.println("File not found");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }*/
 
 
 

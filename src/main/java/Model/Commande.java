@@ -59,6 +59,7 @@ public class Commande {
                 "listeProduits=" + listeProduits +
                 ", numéro='" + numéro + '\'' +
                 ", prix de la commande=" + PrixCommande +
+                "acheteur=" + acheteur +
                 '}';
     }
 }
